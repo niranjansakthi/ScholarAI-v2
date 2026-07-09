@@ -1,0 +1,299 @@
+.flashcards-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  animation: fade-in-up 0.35s ease both;
+}
+
+/* ─── Header / Form Card ──────────────────────────────────── */
+.fc-header-card {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  flex-wrap: wrap;
+}
+
+.fc-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.fc-form {
+  display: flex;
+  gap: 0.65rem;
+  flex: 1;
+  min-width: 260px;
+  max-width: 480px;
+}
+
+.fc-input {
+  flex: 1;
+  padding: 0.65rem 1.1rem;
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-muted);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.fc-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-dim);
+}
+
+.fc-input::placeholder { color: var(--text-muted); }
+
+.fc-generate-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.65rem 1.3rem;
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius-md);
+  color: #FFFFFF;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), opacity var(--transition-fast), background var(--transition-fast);
+}
+
+.fc-generate-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: var(--accent-light);
+  box-shadow: 0 4px 12px rgba(224, 93, 78, 0.25);
+}
+
+.fc-generate-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-spinner {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #FFFFFF;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ─── Progress Row ────────────────────────────────────────── */
+.fc-progress-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.fc-counter {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.fc-progress-bar {
+  flex: 1;
+  height: 5px;
+  background: var(--border-subtle);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.fc-progress-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: var(--radius-full);
+  transition: width 0.4s ease;
+}
+
+.fc-shuffle-btn {
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--border-muted);
+  border-radius: var(--radius-full);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.fc-shuffle-btn:hover {
+  background: var(--bg-surface-2);
+  color: var(--text-primary);
+  border-color: var(--border-subtle);
+}
+
+/* ─── Flashcard 3D Flip ───────────────────────────────────── */
+.fc-card-area {
+  display: flex;
+  justify-content: center;
+  perspective: 1200px;
+}
+
+.fc-card {
+  width: 100%;
+  max-width: 680px;
+  height: 320px;
+  cursor: pointer;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(.4,0,.2,1);
+  outline: none;
+}
+
+.fc-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: var(--radius-lg);
+}
+
+.fc-card.flipped {
+  transform: rotateY(180deg);
+}
+
+.fc-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.fc-card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2.5rem;
+  border-radius: var(--radius-lg);
+  text-align: center;
+}
+
+.fc-card-front {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-muted);
+  box-shadow: var(--shadow-card);
+}
+
+.fc-card-back {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-card);
+  transform: rotateY(180deg);
+}
+
+.fc-face-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.7rem;
+  border-radius: var(--radius-full);
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-muted);
+  color: var(--text-secondary);
+}
+
+.fc-face-label--answer {
+  background: var(--bg-deep);
+  color: var(--text-primary);
+}
+
+.fc-card-text {
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.65;
+  max-width: 480px;
+}
+
+.fc-tap-hint {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  position: absolute;
+  bottom: 1.25rem;
+}
+
+/* ─── Controls ────────────────────────────────────────────── */
+.fc-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.fc-nav-btn {
+  padding: 0.7rem 2rem;
+  border: 1px solid var(--border-muted);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast);
+  box-shadow: var(--shadow-card);
+}
+
+.fc-nav-btn:hover {
+  background: var(--bg-surface-2);
+  border-color: var(--border-subtle);
+  transform: translateY(-2px);
+}
+
+.fc-nav-btn--next {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #FFFFFF;
+}
+
+.fc-nav-btn--next:hover {
+  background: var(--accent-light);
+  border-color: var(--accent-light);
+}
+
+/* ─── Empty / Error ───────────────────────────────────────── */
+.fc-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 3rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.fc-empty-icon {
+  font-size: 3rem;
+  color: var(--accent);
+}
+
+.fc-error {
+  padding: 0.75rem 1.25rem;
+  background: var(--danger-dim);
+  border: 1px solid rgba(198, 78, 78, 0.3);
+  border-radius: var(--radius-md);
+  color: var(--danger);
+  font-size: 0.88rem;
+}
+
+@media (max-width: 640px) {
+  .fc-header-card { flex-direction: column; align-items: stretch; }
+  .fc-card { height: 280px; }
+  .fc-card-text { font-size: 0.92rem; }
+}

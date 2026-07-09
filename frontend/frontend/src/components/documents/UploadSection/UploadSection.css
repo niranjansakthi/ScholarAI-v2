@@ -1,0 +1,32 @@
+.upload-section{
+
+    display:flex;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+}
+
+.upload-section button{
+
+    padding:18px 28px;
+
+    background:#111827;
+
+    color:white;
+
+    border:none;
+
+    border-radius:16px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    transition:.25s;
+}
+
+.upload-section button:hover{
+
+    background:#2563eb;
+}

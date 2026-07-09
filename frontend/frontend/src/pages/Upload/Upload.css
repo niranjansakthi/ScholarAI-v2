@@ -1,0 +1,214 @@
+.upload-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: fade-in-up 0.35s ease both;
+}
+
+.upload-page-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.upload-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+/* ─── Upload Zone ─────────────────────────────────────────── */
+.upload-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 2rem 1.5rem;
+  border-radius: var(--radius-xl);
+  background: var(--bg-surface);
+  border: 2px dashed var(--border-subtle);
+  cursor: pointer;
+  text-align: center;
+  transition:
+    background var(--transition-base),
+    border-color var(--transition-base),
+    transform var(--transition-base),
+    box-shadow var(--transition-base);
+  min-height: 220px;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.upload-zone:hover {
+  background: var(--bg-surface-2);
+  transform: translateY(-2px);
+  border-color: var(--border-muted);
+}
+
+.upload-zone.dragging {
+  background: var(--accent-dim);
+  transform: scale(1.02);
+  border-color: var(--accent);
+}
+
+/* Status variants */
+.upload-zone.status-success { border-style: solid; border-color: rgba(52, 130, 89, 0.5); background: var(--success-dim); }
+.upload-zone.status-error   { border-style: solid; border-color: rgba(198, 78, 78, 0.5); background: var(--danger-dim); }
+.upload-zone.status-uploading { cursor: wait; }
+
+.upload-input-hidden {
+  display: none;
+}
+
+.upload-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+  transition: transform var(--transition-base);
+}
+
+.upload-zone:hover .upload-icon { transform: scale(1.12) translateY(-2px); }
+
+.upload-type-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.upload-type-desc {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  max-width: 260px;
+  line-height: 1.55;
+}
+
+.upload-hint {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  padding: 0.3rem 0.8rem;
+  border: 1px dashed var(--border-subtle);
+  border-radius: var(--radius-full);
+}
+
+/* Progress bar */
+.upload-progress-bar {
+  width: 80%;
+  height: 4px;
+  background: var(--border-subtle);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.upload-progress-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: var(--radius-full);
+  animation: progress-fill 1.8s ease infinite;
+}
+
+@keyframes progress-fill {
+  0%   { width: 0%; opacity: 1; }
+  70%  { width: 90%; opacity: 1; }
+  100% { width: 100%; opacity: 0; }
+}
+
+.upload-status-msg {
+  font-size: 0.84rem;
+  font-weight: 500;
+  padding: 0.3rem 0.9rem;
+  border-radius: var(--radius-full);
+  max-width: 280px;
+}
+
+.upload-status-msg.success { color: var(--success); background: var(--success-dim); }
+.upload-status-msg.error   { color: var(--danger); background: var(--danger-dim); }
+.upload-status-msg.loading { color: var(--accent-text); background: var(--accent-dim); }
+
+.upload-retry-btn {
+  padding: 0.4rem 1rem;
+  border: 1px solid var(--border-muted);
+  border-radius: var(--radius-full);
+  background: var(--bg-surface-2);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.upload-retry-btn:hover {
+  background: var(--accent-dim);
+  color: var(--accent-text);
+  border-color: var(--border-bright);
+}
+
+/* YouTube form */
+.youtube-form {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 340px;
+}
+
+.youtube-url-input {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-muted);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 0.84rem;
+  outline: none;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.youtube-url-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-dim);
+}
+
+.youtube-url-input::placeholder { color: var(--text-muted); }
+
+.youtube-submit-btn {
+  padding: 0.6rem 1.1rem;
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius-md);
+  color: #FFFFFF;
+  font-size: 0.84rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), opacity var(--transition-fast);
+}
+
+.youtube-submit-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: var(--accent-light);
+  box-shadow: 0 4px 12px rgba(224, 93, 78, 0.2);
+}
+
+.youtube-submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+@media (max-width: 860px) {
+  .upload-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── Recent Uploads Panel ────────────────────────────────── */
+.recent-uploads-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  animation: fade-in-up 0.4s ease both;
+}
+
+/* New upload row gets a brief highlight flash */
+.doc-row--new {
+  animation: highlight-row 1.8s ease both;
+}
+
+@keyframes highlight-row {
+  0%   { background: var(--warning-dim); }
+  100% { background: transparent; }
+}
